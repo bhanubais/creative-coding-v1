@@ -49,6 +49,12 @@ canvasSketch(sketch, settings);
 
 ## Advanced Usages
 
+### Output Folder
+
+`--output=output/01`
+
+While saving (pressing `ctrl+s` on the browser), the canvas design saves in the `output/01` folder.
+
 ### New file based on another file
 
 `npx canvas-sketch-cli sketches/sketch-02.js --new --template=./sketches/sketch-01.js --open`
