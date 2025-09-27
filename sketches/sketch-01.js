@@ -1,5 +1,5 @@
 // Import the library
-import canvasSketch from "canvas-sketch";
+const canvasSketch = require('canvas-sketch');
 
 // Specify some output parameters
 const settings = {

@@ -16,7 +16,7 @@
   ],
   "author": "bhanubais",
   "license": "MIT",
-  "type": "module",
+  "type": "CommonJS",
   "dependencies": {
     "canvas-sketch": "^0.7.7"
   }
