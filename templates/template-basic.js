@@ -4,7 +4,7 @@ const canvasSketch = require('canvas-sketch');
 // Specify some output parameters
 const settings = {
   // The [width, height] of the artwork in pixels
-  dimensions: [400, 400]
+  dimensions: [2048, 2048]
 };
 
 // Start the sketch
@@ -14,13 +14,9 @@ const sketch = (props) => {
 
   return () => {
     // Fill the canvas with pink
-    context.fillStyle = 'pink';
+    context.fillStyle = 'white';
     context.fillRect(0, 0, width, height);
 
-    // Now draw a white rectangle in the center
-    context.strokeStyle = "white";
-    context.lineWidth = 4;
-    context.strokeRect(width / 4, height / 4, width / 2, height / 2);
   };
 };
 
