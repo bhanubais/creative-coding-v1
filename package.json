@@ -1,0 +1,23 @@
+{
+  "name": "creative-coding---making-visuals-with-javascript",
+  "version": "1.0.0",
+  "description": "Learning Creative coding in HTML Canvas using `canvas-sketch`",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "canvas-sketch",
+    "canvas",
+    "javascript",
+    "geometry",
+    "learn",
+    "creative-coding"
+  ],
+  "author": "bhanubais",
+  "license": "MIT",
+  "type": "module",
+  "dependencies": {
+    "canvas-sketch": "^0.7.7"
+  }
+}
