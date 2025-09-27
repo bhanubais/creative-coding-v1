@@ -5,10 +5,12 @@
 
 ## Quick start
 
-New file
+**New file**
+
 `npx canvas-sketch-cli sketches/sketch-01.js --new --open`
 
-Open existed file
+**Open existed file**
+
 `npx canvas-sketch-cli sketches/sketch-01.js --open`
 
 ## Boilerplate for a new sketch
