@@ -8,6 +8,7 @@ const settings = {
   // The [width, height] of the artwork in pixels
   dimensions: [ 1024, 1024 ],
   animate: true,
+  fps: 60
 };
 
 // Start the sketch

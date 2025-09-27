@@ -61,6 +61,14 @@ While saving (pressing `ctrl+s` on the browser), the canvas design saves in the 
 
 It will create a new file `sketch-02.js` with the exact code written inside `sketch-01.js`.
 
+### Video output
+
+`npm install @ffmpeg-installer/ffmpeg --global`
+
+`--stream`
+
+Press `ctrl+shift+s` to start streaming and again to stop streaming. After that an `mp4` file will be saved inside `--output` folder.
+
 ### Hot Reloading
 
 `--hot`
