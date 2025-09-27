@@ -47,17 +47,19 @@ class Point {
 class Agent extends Point {
   constructor(x, y) {
     super(x, y);
-    this.radius = 10;
+    this.radius = random.range(4, 12);
   }
 
   draw(context) {
     context.save();
     context.translate(this.x, this.y);
 
+    context.lineWidth = 4;
+
     context.beginPath();
     context.arc(0, 0, this.radius, 0, Math.PI * 2);
-    context.fillStyle = "black";
     context.fill();
+    context.stroke();
 
     context.restore();
   }
