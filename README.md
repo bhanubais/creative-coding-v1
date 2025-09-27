@@ -104,3 +104,10 @@ If you happen to have multiple sketches (multiple `canvasSketch()` calls) in a s
 canvasSketch(mainSketch, { id: 'primary' });
 canvasSketch(otherSketch, { id: 'secondary' });
 ```
+
+### Load resources folder
+
+If you are building your website into a `public/`, `app/` or other sub-directory, you may need to specify this directory for assets to load with correct paths:
+
+`--dir public`
+
