@@ -36,6 +36,7 @@ const sketch = (props) => {
       cx = ix + radius * Math.cos(angle);
       cy = iy + radius * Math.sin(angle);
       
+      // Rays
       context.save();
       context.translate(cx, cy);
       context.rotate(angle);
@@ -46,7 +47,17 @@ const sketch = (props) => {
       context.fill();
       context.restore();
 
-      
+      // Arcs
+      context.save();
+      context.translate(ix, iy);
+      context.rotate(angle);
+
+      context.lineWidth = 4;
+      context.beginPath();
+      context.arc(0, 0, radius, slice * -.3, slice * .3);
+      context.stroke();
+      context.restore();
+
     }
 
   };
