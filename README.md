@@ -111,3 +111,16 @@ If you are building your website into a `public/`, `app/` or other sub-directory
 
 `--dir public`
 
+## Building to a Website
+
+```bash
+# Render website to 'public/' without minification
+npx canvas-sketch-cli mysketch.js --dir public --build --no-compress
+
+# Render website to a single standalone file called 'index.html'
+npx canvas-sketch-cli mysketch.js --name index --build --inline
+
+# Render a website using a different HTML file and custom JS src
+npx canvas-sketch-cli src/index.js --html=src/page.html --js=bundle.js
+```
+
