@@ -18,6 +18,7 @@
   "license": "MIT",
   "type": "CommonJS",
   "dependencies": {
-    "canvas-sketch": "^0.7.7"
+    "canvas-sketch": "^0.7.7",
+    "canvas-sketch-util": "^1.10.0"
   }
 }
