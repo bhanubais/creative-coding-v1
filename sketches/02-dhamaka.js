@@ -25,7 +25,7 @@ const sketch = (props) => {
     const iy = height * .5;
     const w = width * 0.1;
     const h = height * 0.01;
-    const n = 12;
+    const n = 40;
     const radius = width * .3;
     const slice = math.degToRad(360 / n);
     let angle;
@@ -40,10 +40,10 @@ const sketch = (props) => {
       context.save();
       context.translate(cx, cy);
       context.rotate(angle);
-      context.scale(1, random.range(1, 3));
+      context.scale(random.range(.2, .5), random.range(.1, 2));
 
       context.beginPath();
-      context.rect(-w * .5, -h * .5, w, h);
+      context.rect(-w * random.range(0, .5), -h * .5, w, h);
       context.fill();
       context.restore();
 
@@ -52,9 +52,12 @@ const sketch = (props) => {
       context.translate(ix, iy);
       context.rotate(angle);
 
-      context.lineWidth = 4;
+      context.lineWidth = random.range(5, 20);
       context.beginPath();
-      context.arc(0, 0, radius, slice * -.3, slice * .3);
+      context.arc(0, 0, 
+        radius * random.range(.2, 1.3), 
+        slice * random.range(-8, 1), // startAngle
+        slice * random.range(1, 5)); // endAngle
       context.stroke();
       context.restore();
 
