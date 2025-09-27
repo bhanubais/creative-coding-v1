@@ -5,7 +5,8 @@ const random = require('canvas-sketch-util/random');
 // Specify some output parameters
 const settings = {
   // The [width, height] of the artwork in pixels
-  dimensions: [1024, 1024]
+  dimensions: [1024, 1024],
+  animate: true,
 };
 
 // Start the sketch
@@ -29,6 +30,8 @@ const sketch = (props) => {
     // draw all agents
     agents.forEach(agent => {
       agent.draw(context);
+      agent.update();
+      agent.bounce(width, height);
     });
 
   };
@@ -37,17 +40,18 @@ const sketch = (props) => {
 // Start the sketch with parameters
 canvasSketch(sketch, settings);
 
-class Point {
+class Vector {
   constructor(x, y) {
     this.x = x;
     this.y = y;
   }
 }
 
-class Agent extends Point {
+class Agent extends Vector {
   constructor(x, y) {
     super(x, y);
     this.radius = random.range(4, 12);
+    this.vel = new Vector(random.range(-1, 1), random.range(-1, 1));
   }
 
   draw(context) {
@@ -62,5 +66,15 @@ class Agent extends Point {
     context.stroke();
 
     context.restore();
+  }
+
+  update() {
+    this.x += this.vel.x;
+    this.y += this.vel.y;
+  }
+
+  bounce(width, height) {
+    if (this.x <= 0 || width <= this.x) this.vel.x *= -1;
+    if (this.y <= 0 || height <= this.y) this.vel.y *= -1;
   }
 }
