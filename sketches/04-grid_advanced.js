@@ -1,5 +1,7 @@
 // Import the library
 const canvasSketch = require('canvas-sketch');
+const random = require('canvas-sketch-util/random');
+const math = require('canvas-sketch-util/math');
 
 // Specify some output parameters
 const settings = {
@@ -31,19 +33,27 @@ const sketch = (props) => {
       const col = i % cols;
       const row = Math.floor(i / cols);
 
-      console.log(col, row);
-
       const w = cellW * .8;
       const h = cellH * .8;
       const x = cellW * col;
       const y = cellH * row;
+
+      // Simplex 2D Noise number
+      // Range of n: -1 to 1
+      const n = random.noise2D(x, y, 0.001);
+
+      let angle = n * Math.PI;  // -180 to 180
+      angle *= 0.2;             // -36 to 36
+      const scale = math.mapRange(n, -1, 1, 1, 30);
+      console.log(n);
 
       context.save();
       context.translate(marginX, marginY);
       context.translate(x, y);
       context.translate(cellW * .5, cellH * .5);
 
-      context.lineWidth = 4;
+      context.rotate(angle);
+      context.lineWidth = scale;
 
       context.beginPath();
       context.moveTo(-w * .5, 0);
