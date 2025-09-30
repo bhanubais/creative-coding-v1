@@ -6,7 +6,8 @@ const math = require('canvas-sketch-util/math');
 // Specify some output parameters
 const settings = {
   // The [width, height] of the artwork in pixels
-  dimensions: [ 1024, 1024 ]
+  dimensions: [ 1024, 1024 ],
+  animate: true
 };
 
 // Start the sketch
@@ -14,17 +15,17 @@ const sketch = (props) => {
   // Destructure what we need from props
   const { context, width, height } = props;
 
-  const gridW = width * .8;
-  const gridH = height * .8;
+  const gridW = width * 0.8;
+  const gridH = height * 0.8;
   const cols = 10;
   const rows = 10;
   const cells = cols * rows;
-  const marginX = (width - gridW) * .5;
-  const marginY = (height - gridH) * .5;
+  const marginX = (width - gridW) * 0.5;
+  const marginY = (height - gridH) * 0.5;
   const cellW = gridW / cols;
   const cellH = gridH / rows;
 
-  return () => {
+  return ({ frame }) => {
     // Fill the canvas with pink
     context.fillStyle = 'white';
     context.fillRect(0, 0, width, height);
@@ -33,31 +34,31 @@ const sketch = (props) => {
       const col = i % cols;
       const row = Math.floor(i / cols);
 
-      const w = cellW * .8;
-      const h = cellH * .8;
+      const w = cellW * 0.8;
+      const h = cellH * 0.8;
       const x = cellW * col;
       const y = cellH * row;
 
       // Simplex 2D Noise number
       // Range of n: -1 to 1
-      const n = random.noise2D(x, y, 0.001);
+      const n = random.noise2D(x + frame * 10, y, 0.001);
 
       let angle = n * Math.PI;  // -180 to 180
       angle *= 0.2;             // -36 to 36
       const scale = math.mapRange(n, -1, 1, 1, 30);
-      console.log(n);
 
       context.save();
       context.translate(marginX, marginY);
       context.translate(x, y);
-      context.translate(cellW * .5, cellH * .5);
+      context.translate(cellW * 0.5, cellH * 0.5);
 
       context.rotate(angle);
       context.lineWidth = scale;
+      // context.lineWidth = 5;
 
       context.beginPath();
-      context.moveTo(-w * .5, 0);
-      context.lineTo(w * .5, 0);
+      context.moveTo(-w * 0.5, 0);
+      context.lineTo(w * 0.5, 0);
       context.stroke();
 
       context.restore();
