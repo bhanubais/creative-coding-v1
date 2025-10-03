@@ -20,7 +20,8 @@ const sketch = (props) => {
   // Destructure what we need from props
   const { context, width, height } = props;
 
-  const scale = 1 / 20;
+  const cell = 20;
+  const scale = 1 / cell;
   const cols = Math.floor(width * scale);
   const rows = Math.floor(height * scale);
   const numCells = cols * rows;
@@ -46,18 +47,46 @@ const sketch = (props) => {
     const mw = metrics.actualBoundingBoxLeft + metrics.actualBoundingBoxRight;
     const mh = metrics.actualBoundingBoxAscent + metrics.actualBoundingBoxDescent;
 
-    const x = (cols - mw) * 0.5;
-    const y = (rows - mh) * 0.5;
+    const tx = (cols - mw) * 0.5;
+    const ty = (rows - mh) * 0.5;
 
     typeContext.save();
-    typeContext.translate(x, y);
+    typeContext.translate(tx, ty);
 
     typeContext.beginPath();
-    typeContext.rect(0, 0, mw, mh);
-    typeContext.stroke();
+    // typeContext.rect(0, 0, mw, mh);
+    // typeContext.strokeStyle = 'white';
+    // typeContext.stroke();
 
     typeContext.fillText(text, mx, my);
     typeContext.restore();
+
+    const typeData = typeContext.getImageData(0, 0, cols, rows).data;
+
+    for (let i = 0; i < numCells; i++) {
+      const col = i % cols;
+      const row = Math.floor(i / cols);
+
+      const x = col * cell;
+      const y = row * cell;
+
+      const r = typeData[ i * 4 + 0 ];
+      const g = typeData[ i * 4 + 1 ];
+      const b = typeData[ i * 4 + 2 ];
+      const a = typeData[ i * 4 + 3 ];
+
+      context.save();
+      context.fillStyle = `rgb(${r}, ${g}, ${b})`;
+      context.translate(x, y);
+      context.translate(cell * 0.5, cell * 0.5);
+      // context.fillRect(0, 0, cell, cell);
+
+      context.beginPath();
+      context.arc(0, 0, cell * 0.5, 0, Math.PI * 2);
+      context.fill();
+      
+      context.restore();
+    }
 
     context.drawImage(typeCanvas, 0, 0);
   };
