@@ -12,41 +12,54 @@ let text = 'A';
 let fontSize = 1200;
 let fontFamily = 'serif';
 
+const typeCanvas = document.createElement('canvas');
+const typeContext = typeCanvas.getContext('2d');
+
 // Start the sketch
 const sketch = (props) => {
   // Destructure what we need from props
   const { context, width, height } = props;
 
+  const cell = 20;
+  const cols = Math.floor(width / cell);
+  const rows = Math.floor(height / cell);
+  const numCells = cols * rows;
+
+  typeCanvas.width = cols;
+  typeCanvas.height = rows;
+
   return () => {
     // Fill the canvas with pink
-    context.fillStyle = 'white';
-    context.fillRect(0, 0, width, height);
+    typeContext.fillStyle = 'black';
+    typeContext.fillRect(0, 0, cols, rows);
     
-    context.fillStyle = 'black';
-    context.font = `${fontSize}px ${fontFamily}`;
-    context.textBaseline = "top";
-    context.textAlign = "center";
+    fontSize = cols;
 
-    const metrics = context.measureText(text);
+    typeContext.fillStyle = 'white';
+    typeContext.font = `${fontSize}px ${fontFamily}`;
+    typeContext.textBaseline = "top";
+    typeContext.textAlign = "center";
+
+    const metrics = typeContext.measureText(text);
     const mx = metrics.actualBoundingBoxLeft;
     const my = metrics.actualBoundingBoxAscent;
     const mw = metrics.actualBoundingBoxLeft + metrics.actualBoundingBoxRight;
     const mh = metrics.actualBoundingBoxAscent + metrics.actualBoundingBoxDescent;
 
-    const x = (width - mw) * 0.5;
-    const y = (height - mh) * 0.5;
+    const x = (cols - mw) * 0.5;
+    const y = (rows - mh) * 0.5;
 
-    context.save();
-    context.translate(x, y);
+    typeContext.save();
+    typeContext.translate(x, y);
 
-    context.beginPath();
-    context.rect(0, 0, mw, mh);
-    context.stroke();
+    typeContext.beginPath();
+    typeContext.rect(0, 0, mw, mh);
+    typeContext.stroke();
 
-    context.beginPath();
-    context.fillText(text, mx, my);
+    typeContext.fillText(text, mx, my);
+    typeContext.restore();
 
-    context.restore();
+    context.drawImage(typeCanvas, 0, 0);
   };
 };
 
