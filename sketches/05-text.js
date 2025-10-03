@@ -20,9 +20,9 @@ const sketch = (props) => {
   // Destructure what we need from props
   const { context, width, height } = props;
 
-  const cell = 20;
-  const cols = Math.floor(width / cell);
-  const rows = Math.floor(height / cell);
+  const scale = 1 / 20;
+  const cols = Math.floor(width * scale);
+  const rows = Math.floor(height * scale);
   const numCells = cols * rows;
 
   typeCanvas.width = cols;
